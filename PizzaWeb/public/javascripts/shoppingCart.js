@@ -197,17 +197,18 @@ $('.show-cart').on("change", ".item-count", function(event) {
 });
 
 $('.submit-order').click(function(event){
-  $.post("/submitOrder", {"cart":JSON.stringify(cart)}, function(){
+  orderNumber++;
+  $.post("/submitOrder", {"orderID":JSON.stringify(orderNumber),"cart":JSON.stringify(cart)}, function(){
     console.log("response received");
   });
-  //shoppingCart.clearCart();
-  orderNumber++;
-  $('.order-status').text("order submitted: " + orderNumber);
+  shoppingCart.clearCart();
+  $('.order-status').text("order submitted: Order ID is " + orderNumber);
   displayCart();
 });
 
 $('.close-order').click(function(event){
   shoppingCart.clearCart();
+  $('.order-status').text("No order submitted yet");
   displayCart();
 });
 
