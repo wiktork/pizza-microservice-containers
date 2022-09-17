@@ -1,0 +1,18 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: cosmosdb-state
+spec:
+  type: state.azure.cosmosdb
+  version: v1
+  metadata:
+    - name: url
+      value: cosmos-db-url
+    - name: masterKey
+      value: cosmos-primary-key
+    - name: database
+      value: your-db-name
+    - name: collection
+      value: your-collection-name
+    - name: partitionKey
+      value: your-partition-key
