@@ -10,10 +10,10 @@ $(document).ready(function(){
         $('.searched-order-status').text("Order Status for "+orderNumber);
         if (orderNumber != null)
         {
-            $.get("/getOrderStatus", orderNumber, function(data,status,xhr){
+            $.get(`/getOrderStatus/${orderNumber}`, function(data,status,xhr){
                 clearDisplayStatus();
                 orderStatus = JSON.stringify(data);
-                console.log(orderStatus);
+                console.log("Order status: "+ orderStatus);
                 console.log("/getOrderStatus response status: "+status);
                 console.log("is order status InProgress: "+ (orderStatus == JSON.stringify('InProgress')));
                 console.log("is order status Ready: "+ (orderStatus == JSON.stringify('Ready')));
