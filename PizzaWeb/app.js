@@ -1,17 +1,30 @@
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const indexRouter = require('./routes/index');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var cons = require('consolidate');
+
+var indexRouter = require('./routes/index');
+var orderStatusRouter = require('./routes/orderStatus');
+
 const axios = require('axios');
 
-const app = express();
+var app = express();
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// view engine setup
+app.engine('html', cons.swig)
+app.set('views', path.join(__dirname, 'public'));
+app.set('view engine', 'html');
+
 app.use('/', indexRouter);
+app.use('/orderStatus', orderStatusRouter);
+
 app.use(express.json({ type: ['application/json', 'application/*+json'] }));
 
 // dapr integration
@@ -30,6 +43,11 @@ app.post('/submitOrder', function(req, res){
         .catch(function (error) {
             console.log("failed to publish message." + error);
         });
+});
+
+app.get('/getOrderStatus', function(req,res){
+    console.log("invoked /getOrderStatus GET method");
+    res.send("Ready");
 });
 
 module.exports = app;
