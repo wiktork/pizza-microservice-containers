@@ -24,6 +24,8 @@ app.MapGet("/dapr/subscribe", () => {
 app.MapGet("/order/{orderId}", (string orderId) => {
     // fetch order from cosmosdb state store by orderId
     var resp = httpClient.GetStringAsync($"{stateStoreBaseUrl}/{orderId.ToString()}");
+    Console.WriteLine("Println resp");
+    Console.WriteLine(resp.Result);
     var order = JsonSerializer.Deserialize<Order>(resp.Result)!;
     return Results.Ok(order);
 });

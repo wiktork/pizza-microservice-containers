@@ -165,7 +165,9 @@ function displayCart() {
   $('.total-cart').html(shoppingCart.totalCart());
   $('.total-count').html(shoppingCart.totalCount());
 }
-
+function getRandomInt(max) {
+  return Math.floor(Math.random() * max);
+}
 // Delete item button
 
 $('.show-cart').on("click", ".delete-item", function(event) {
@@ -197,7 +199,7 @@ $('.show-cart').on("change", ".item-count", function(event) {
 });
 
 $('.submit-order').click(function(event){
-  orderNumber++;
+  orderNumber = getRandomInt(100);
   $.post("/submitOrder", {"orderID":JSON.stringify(orderNumber),"cart":JSON.stringify(cart)}, function(){
     console.log("response received");
   });

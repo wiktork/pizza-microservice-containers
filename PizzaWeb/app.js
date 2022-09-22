@@ -29,7 +29,7 @@ app.use(express.json({ type: ['application/json', 'application/*+json'] }));
 
 // dapr integration
 // publish endpoint: http://localhost:<daprPort>/v1.0/publish/<pubsubname>/<topic>[?<metadata>]
-const pubsubEndpoint = `http://localhost:3500/v1.0/publish/servicebus-pubsub/order`;
+const pubsubEndpoint = `http://localhost:3500/v1.0/publish/pizzaeventbus/order`;
 const DAPR_HOST = process.env.DAPR_HOST || "http://localhost";
 const DAPR_HTTP_PORT = process.env.DAPR_HTTP_PORT || "3500";
 

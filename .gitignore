@@ -5,3 +5,5 @@ PizzaOrderProcessor/.idea/
 PizzaOrderProcessor/bin/
 PizzaOrderProcessor/obj/
 PizzaWeb/node_modules
+/Debug
+package-lock.json

@@ -37,6 +37,7 @@ $(document).ready(function(){
     function displayStatus(){
 
         console.log("in displayStatus function. statusNumber here is: "+statusNumber);
+        $('#order-created').addClass(statusNumber >= 0? 'completed':'');
         $('#order-inProgress').addClass(statusNumber>0? 'completed':'');
         $('#order-ready').addClass(statusNumber>1? 'completed':'');
     }

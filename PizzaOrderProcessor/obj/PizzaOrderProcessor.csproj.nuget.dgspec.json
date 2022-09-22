@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\cawa\\Documents\\dapr-pizza-order-system-master\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj": {}
+    "C:\\Users\\cawa\\source\\repos\\pizza-microservice-containers\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj": {}
   },
   "projects": {
-    "C:\\Users\\cawa\\Documents\\dapr-pizza-order-system-master\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj": {
+    "C:\\Users\\cawa\\source\\repos\\pizza-microservice-containers\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\cawa\\Documents\\dapr-pizza-order-system-master\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj",
+        "projectUniqueName": "C:\\Users\\cawa\\source\\repos\\pizza-microservice-containers\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj",
         "projectName": "PizzaOrderProcessor",
-        "projectPath": "C:\\Users\\cawa\\Documents\\dapr-pizza-order-system-master\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj",
+        "projectPath": "C:\\Users\\cawa\\source\\repos\\pizza-microservice-containers\\PizzaOrderProcessor\\PizzaOrderProcessor.csproj",
         "packagesPath": "C:\\Users\\cawa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\cawa\\Documents\\dapr-pizza-order-system-master\\PizzaOrderProcessor\\obj\\",
+        "outputPath": "C:\\Users\\cawa\\source\\repos\\pizza-microservice-containers\\PizzaOrderProcessor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\cawa\\AppData\\Roaming\\NuGet\\NuGet.Config",
