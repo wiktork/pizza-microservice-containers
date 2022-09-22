@@ -1,0 +1,7 @@
+.DS_Store
+.idea/
+/components_local
+PizzaOrderProcessor/.idea/
+PizzaOrderProcessor/bin/
+PizzaOrderProcessor/obj/
+PizzaWeb/node_modules
