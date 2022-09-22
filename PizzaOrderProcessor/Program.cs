@@ -15,7 +15,7 @@ if (app.Environment.IsDevelopment()) {app.UseDeveloperExceptionPage();}
 
 // Register Dapr pub/sub subscriptions
 app.MapGet("/dapr/subscribe", () => {
-    var sub = new DaprSubscription("servicebus-pubsub", "order", "order");
+    var sub = new DaprSubscription("pizzaeventbus", "order", "order");
     Console.WriteLine("Dapr pub/sub is subscribed to: " + sub);
     return Results.Json(new DaprSubscription[]{sub});
 });
@@ -53,7 +53,7 @@ app.MapPost("/order/status", (DaprData<OrderStatus> requestData) => {
 // Post order
 app.MapPost("/order", (DaprData<Order> requestData) => {
     var order = requestData.Data;
-    order.Status ??= "created";
+    order.Status ??= "Created";
     // write the order information into state store
     var orderInfoJson = JsonSerializer.Serialize(
         new[] {
