@@ -7,3 +7,4 @@ PizzaOrderProcessor/obj/
 PizzaWeb/node_modules
 /Debug
 package-lock.json
+PizzaOrderProcessor/.vs/

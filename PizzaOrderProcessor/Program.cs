@@ -7,7 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
-const string stateStoreBaseUrl = "http://localhost:3500/v1.0/state/cosmosdb-state";
+string DAPR_HOST = Environment.GetEnvironmentVariable("DAPR_HOST") ?? "http://localhost";
+string DAPR_HTTP_PORT = Environment.GetEnvironmentVariable("DAPR_HTTP_PORT") ?? "3600";
+string STATESTORENAME = Environment.GetEnvironmentVariable("STATESTORENAME") ?? "statestore";
+string PUBSUBNAME = Environment.GetEnvironmentVariable("PUBSUBNAME") ?? "pubsub";
+string TOPICNAME = Environment.GetEnvironmentVariable("TOPICNAME") ?? "order";
+string stateStoreBaseUrl = $"{DAPR_HOST}:{DAPR_HTTP_PORT}/v1.0/state/{STATESTORENAME}";
 var httpClient = new HttpClient();
 httpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -15,7 +20,7 @@ if (app.Environment.IsDevelopment()) {app.UseDeveloperExceptionPage();}
 
 // Register Dapr pub/sub subscriptions
 app.MapGet("/dapr/subscribe", () => {
-    var sub = new DaprSubscription("pizzaeventbus", "order", "order");
+    var sub = new DaprSubscription($"{PUBSUBNAME}", $"{TOPICNAME}", "order");
     Console.WriteLine("Dapr pub/sub is subscribed to: " + sub);
     return Results.Json(new DaprSubscription[]{sub});
 });
@@ -23,6 +28,7 @@ app.MapGet("/dapr/subscribe", () => {
 // Get order by orderId
 app.MapGet("/order/{orderId}", (string orderId) => {
     // fetch order from cosmosdb state store by orderId
+    Console.WriteLine("Web URL in /order/{orderId}: "+ $"{stateStoreBaseUrl}/{orderId.ToString()}");
     var resp = httpClient.GetStringAsync($"{stateStoreBaseUrl}/{orderId.ToString()}");
     Console.WriteLine("Println resp");
     Console.WriteLine(resp.Result);

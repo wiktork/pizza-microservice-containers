@@ -38,5 +38,5 @@ Start the service:
 
 Run the following command under the dir `pizza-microservice-containers/PizzaOrderProcessor`
 ```
-dapr run --dapr-http-port 3501 --app-id order-processor-http --components-path ../components/ --app-port 3001 -- dotnet run --project .
+dapr run --dapr-http-port 3600 --app-id order-processor-http --components-path ../components_local/ --app-port 3001 -- dotnet run --project .
 ```

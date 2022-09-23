@@ -28,10 +28,12 @@ app.use('/orderStatus', orderStatusRouter);
 app.use(express.json({ type: ['application/json', 'application/*+json'] }));
 
 // dapr integration
-// publish endpoint: http://localhost:<daprPort>/v1.0/publish/<pubsubname>/<topic>[?<metadata>]
-const pubsubEndpoint = `http://localhost:3500/v1.0/publish/pizzaeventbus/order`;
-const DAPR_HOST = process.env.DAPR_HOST || "http://localhost";
+let DAPR_HOST = process.env.DAPR_HOST || "http://localhost";
 const DAPR_HTTP_PORT = process.env.DAPR_HTTP_PORT || "3500";
+let PUBSUBNAME = process.env.PUBSUBNAME || "pubsub";
+let TOPICNAME = process.env.TOPICNAME || "order";
+// publish endpoint: http://localhost:<daprPort>/v1.0/publish/<pubsubname>/<topic>[?<metadata>]
+const pubsubEndpoint = `${DAPR_HOST}:${DAPR_HTTP_PORT}/v1.0/publish/${PUBSUBNAME}/${TOPICNAME}`;
 
 let axiosConfig = {
     headers: {
