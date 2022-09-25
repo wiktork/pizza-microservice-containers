@@ -37,8 +37,8 @@ The Pizza Order App demo has the following features:
 * Install [Node.js](https://nodejs.org/download/)
 * Install [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
 * Have a working Azure subscription
-* Create a service bus with *Standard* sku or above. Create a *Topic* called *order*
-* Create a Cosomos DB with SQL interface. Create a new *Database* called *pizza-demo-db* and a *container* under the database called *pizza-demo-container*. Put */id* as partition key in the container.
+* Create an [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-create-namespace-portal) with *Standard* sku or above. Create a *Topic* called *order*
+* Create an [Azure Cosomos DB with SQL interface](https://learn.microsoft.com/azure/cosmos-db/sql/create-cosmosdb-resources-portal). Create a new *Database* called *pizza-demo-db* and a *container* under the database called *pizza-demo-container*. Put */id* as partition key in the container.
 
 ## Test Locally
 Download this repository to test the code locally.
