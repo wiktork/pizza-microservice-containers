@@ -1,0 +1,12 @@
+# statestore.yaml for Azure Blob storage component
+componentType: pubsub.azure.servicebus
+version: v1
+metadata:
+- name: connectionString
+  secretRef: connection-string
+secrets:
+- name: connection-string # Required when not using Azure Authentication.
+  value: "your service bus connection string"
+scopes:
+- order-web
+- order-processor-http

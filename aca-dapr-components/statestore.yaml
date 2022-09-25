@@ -1,0 +1,19 @@
+# statestore.yaml for Azure Blob storage component
+componentType: state.azure.cosmosdb
+version: v1
+metadata:
+- name: url
+  value: https://pizzacosmossql.documents.azure.com:443/
+- name: masterKey
+  secretRef: master-key
+- name: database
+  value: pizza-demo-db
+- name: collection
+  value: pizza-demo-container
+- name: partitionKey
+  value: orderID
+secrets:
+- name: master-key
+  value: "your cosmos db master key"
+scopes:
+- order-processor-http
