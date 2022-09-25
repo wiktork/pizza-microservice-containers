@@ -38,7 +38,23 @@ The Pizza Order App demo has the following features:
 * Install [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
 * Have a working Azure subscription
 * Create an [Azure Service Bus](https://learn.microsoft.com/azure/service-bus-messaging/service-bus-create-namespace-portal) with *Standard* sku or above. Create a *Topic* called *order*
+```
+az servicebus namespace create --name "your_service_bus_name" --resource-group "your_resource_group_name" --sku Standard
+```
+```
+az servicebus topic create --name "order" --namespace-name "your_service_bus_name" --resource-group "your_resource_group_name"
+```
+
 * Create an [Azure Cosomos DB with SQL interface](https://learn.microsoft.com/azure/cosmos-db/sql/create-cosmosdb-resources-portal). Create a new *Database* called *pizza-demo-db* and a *container* under the database called *pizza-demo-container*. Put */id* as partition key in the container.
+```
+az cosmosdb create --name "your_cosmosdb_name" --resource-group "your_resource_group" --default-consistency-level Eventual --locations regionName="westus" failoverPriority=0 isZoneRedundant=False --locations regionName="eastus" failoverPriority=1 isZoneRedundant=False
+```
+```
+az cosmosdb sql database create --account-name "your_cosmosdb_name" --resource-group "your_resource_group" --name "pizza-demo-db"
+```
+```
+az cosmosdb sql container create --account-name "your_cosmosdb_name" --resource-group "your_resource_group" --database-name "pizza-demo-db" --name "pizza-demo-container" --partition-key-path "/id" --throughput 4000
+```
 
 ## Test Locally
 Download this repository to test the code locally.
