@@ -8,7 +8,7 @@ spec:
   metadata:
     - name: url
       value: cosmos-db-url
-    - name: masterKey
+    - name: primaryKey
       value: cosmos-primary-key
     - name: database
       value: your-db-name
