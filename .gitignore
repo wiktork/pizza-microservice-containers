@@ -9,3 +9,4 @@ PizzaWeb/node_modules
 package-lock.json
 PizzaOrderProcessor/.vs/
 aca-dapr-components_local
+components_local_*

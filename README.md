@@ -45,16 +45,14 @@ az servicebus namespace create --name "your_service_bus_name" --resource-group "
 az servicebus topic create --name "order" --namespace-name "your_service_bus_name" --resource-group "your_resource_group_name"
 ```
 
-* Create an [Azure Cosomos DB with SQL interface](https://learn.microsoft.com/azure/cosmos-db/sql/create-cosmosdb-resources-portal). Create a new *Database* called *pizza-demo-db* and a *container* under the database called *pizza-demo-container*. Put */id* as partition key in the container.
+* Create an [Azure Storage account](https://learn.microsoft.com/azure/storage/common/storage-account-create?tabs=azure-portal). Create a new *blob container*.
 ```
-az cosmosdb create --name "your_cosmosdb_name" --resource-group "your_resource_group" --default-consistency-level Eventual --locations regionName="westus" failoverPriority=0 isZoneRedundant=False --locations regionName="eastus" failoverPriority=1 isZoneRedundant=False
-```
-```
-az cosmosdb sql database create --account-name "your_cosmosdb_name" --resource-group "your_resource_group" --name "pizza-demo-db"
+az storage account create --name "your_storage_account_name" --resource-group "your_resource_group_name"
 ```
 ```
-az cosmosdb sql container create --account-name "your_cosmosdb_name" --resource-group "your_resource_group" --database-name "pizza-demo-db" --name "pizza-demo-container" --partition-key-path "/id" --throughput 4000
+az storage container create --name "your_container_name" --account-name "your_storage_account_name" --public-access blob
 ```
+
 
 ## Test Locally
 Download this repository to test the code locally.
@@ -63,7 +61,7 @@ In */components* directory there are two Dapr component files:
 * pubsub.yaml
 * statestore.yaml
 
-Put your Azure service bus connection string in pubsub.yaml and Azure CosmosDB master key in statestore.yaml.
+Put your Azure service bus connection string in pubsub.yaml and Azure Storage blob info in statestore.yaml.
 
 ### Run PizzaWeb
 Change project to the *PizzaWeb* directory. Initialize the project:
@@ -97,7 +95,7 @@ In */aca-dapr-components* directory there are two Dapr component files:
 * pubsub.yaml
 * statestore.yaml
 
-Put your Azure Service Bus connection string in pubsub.yaml and Azure CosmosDB master key in statestore.yaml.
+Put your Azure Service Bus connection string in pubsub.yaml and Azure Storage blob container info in statestore.yaml.
 
 ### Login to Azure using Azure CLI
 
@@ -140,7 +138,7 @@ az group create --name %RESOURCE_GROUP% --location %LOCATION%
 
 3. Create Azure Container App Environment
 ```azure cli
-az containerapp env dapr-component set --name %CONTAINERAPPS_ENVIRONMENT% --resource-group %RESOURCE_GROUP% --dapr-component-name pubsub --yaml pubsub.yaml
+az containerapp env create --name %CONTAINERAPPS_ENVIRONMENT% --resource-group %RESOURCE_GROUP% --location %LOCATION%
 ```
 
 ### Deploy Dapr component
@@ -167,5 +165,5 @@ az containerapp create --name order-web --resource-group %RESOURCE_GROUP% --envi
 Assuming container images has been built using the dockerfile in PizzaWeb and pushed to Dockerhub.
 
 ```
-az containerapp create --name order-processor-http --resource-group %RESOURCE_GROUP% --environment %CONTAINERAPPS_ENVIRONMENT% --image <your docker hub account>/dotnet-pizza-backend:latest --target-port 3001 --ingress external --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-processor-http --dapr-app-port 3001
+az containerapp create --name order-processor-http --resource-group %RESOURCE_GROUP% --environment %CONTAINERAPPS_ENVIRONMENT% --image <your docker hub account>/dotnet-pizza-backend:latest --target-port 80 --ingress external --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-processor-http --dapr-app-port 80
 ```

@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "f08eb36d-c78f-435c-8da2-90c2f28a2854",
+		"name": "Dapr Pizza Order Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Update Order Status",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"data\": {\n        \"orderId\": 9,\n        \"status\": \"InProgress\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/order/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"order",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Order By ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/order/9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"order",
+						"9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"data\": {\n        \"orderId\": 9,\n        \"cart\": [\n            {\n                \"name\": \"Cheese\",\n                \"price\": 20,\n                \"count\": 4\n            }\n        ],\n        \"status\": \"created\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/order/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"order",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

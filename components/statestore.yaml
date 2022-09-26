@@ -1,18 +1,14 @@
 apiVersion: dapr.io/v1alpha1
 kind: Component
 metadata:
-  name: cosmosdb-state
+  name: statestore
 spec:
-  type: state.azure.cosmosdb
+  type: state.azure.blobstorage
   version: v1
   metadata:
-    - name: url
-      value: cosmos-db-url
-    - name: primaryKey
-      value: cosmos-primary-key
-    - name: database
-      value: your-db-name
-    - name: collection
-      value: your-collection-name
-    - name: partitionKey
-      value: your-partition-key
+  - name: accountName
+    value: "[your_account_name]"
+  - name: accountKey
+    value: "[your_account_key]"
+  - name: containerName
+    value: "[your_container_name]"

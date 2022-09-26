@@ -1,19 +1,15 @@
 # statestore.yaml for Azure Blob storage component
-componentType: state.azure.cosmosdb
+componentType: state.azure.blobstorage
 version: v1
 metadata:
-- name: url
-  value: https://<your_cosmosdb_name>.documents.azure.com:443/
-- name: primaryKey
-  secretRef: primary-key
-- name: database
-  value: pizza-demo-db
-- name: collection
-  value: pizza-demo-container
-- name: partitionKey
-  value: orderID
+- name: accountName
+  value: "[your_account_name]"
+- name: accountKey
+  secretRef: account-key
+- name: containerName
+  value: "[your_container_name]"
 secrets:
-- name: primary-key
-  value: "your cosmos db master key"
+- name: account-key
+  value: "[your_account_key]"
 scopes:
 - order-processor-http
