@@ -3,7 +3,7 @@ componentType: state.azure.cosmosdb
 version: v1
 metadata:
 - name: url
-  value: https://pizzacosmossql.documents.azure.com:443/
+  value: https://<your_cosmosdb_name>.documents.azure.com:443/
 - name: masterKey
   secretRef: master-key
 - name: database
