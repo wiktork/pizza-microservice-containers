@@ -72,7 +72,7 @@ Run the service with Dapr side car process:
 
 Run the following command under the dir *pizza-microservice-containers/PizzaWeb*
 ```
-dapr run --dapr-http-port 3500 --app-id order-web --components-path ../components/ --app-port 3001 -- npm run debug
+dapr run --dapr-http-port 3500 --app-id order-web --components-path ../components_local/ --app-port 3001 -- npm run debug
 ```
 
 Web application's entry point is : http://localhost:3000/ 

@@ -6,9 +6,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+    <ApplicationInsightsResourceId>/subscriptions/9de7ded6-0ad3-43e6-87b8-17d93e3ff695/resourceGroups/acadaprtest-appinsights/providers/microsoft.insights/components/acadaprtest</ApplicationInsightsResourceId>
+    <UserSecretsId>0c6d50ed-7a6e-4ffd-ab84-80b96dd1da71</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>

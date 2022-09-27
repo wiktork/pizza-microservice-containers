@@ -4,6 +4,7 @@ using System.Text.Json.Serialization;
 using PizzaOrderProcessor.models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddApplicationInsightsTelemetry();
 
 var app = builder.Build();
 
