@@ -50,7 +50,7 @@ az servicebus topic create --name "order" --namespace-name "your_service_bus_nam
 az storage account create --name "your_storage_account_name" --resource-group "your_resource_group_name"
 ```
 ```
-az storage container create --name "your_container_name" --account-name "your_storage_account_name" --public-access blob
+az storage container create --name "your_container_name" --account-name "your_storage_account_name" --public-access container
 ```
 
 
