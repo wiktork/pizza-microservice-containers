@@ -63,6 +63,11 @@ In */components* directory there are two Dapr component files:
 
 Put your Azure service bus connection string in pubsub.yaml and Azure Storage blob info in statestore.yaml.
 
+### start Dapr process
+```
+dapr init
+```
+
 ### Run PizzaWeb
 Change project to the *PizzaWeb* directory. Initialize the project:
 ```
@@ -158,12 +163,12 @@ az containerapp env dapr-component set --name %CONTAINERAPPS_ENVIRONMENT% --reso
 Assuming container images has been built using the dockerfile in PizzaWeb and pushed to Dockerhub.
 
 ```
-az containerapp create --name order-web --resource-group %RESOURCE_GROUP% --environment %CONTAINERAPPS_ENVIRONMENT%  --image <your docker hub account>/node-pizza-web:latest --target-port 3000 --ingress external --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-web --dapr-app-port 3000
+az containerapp create --name order-web --resource-group %RESOURCE_GROUP% --environment %CONTAINERAPPS_ENVIRONMENT%  --image <your docker hub account>/node-pizza-web-appinsights:latest --target-port 3000 --ingress external --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-web --dapr-app-port 3000 --env-vars "APPLICATIONINSIGHTS_CONNECTION_STRING=<your_appinsights_connectionstring>"
 ```
 
 ### Deploy order dispatcher backend
 Assuming container images has been built using the dockerfile in PizzaWeb and pushed to Dockerhub.
 
 ```
-az containerapp create --name order-processor-http --resource-group %RESOURCE_GROUP% --environment %CONTAINERAPPS_ENVIRONMENT% --image <your docker hub account>/dotnet-pizza-backend:latest --target-port 80 --ingress external --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-processor-http --dapr-app-port 80
+az containerapp create --name order-processor-http --resource-group %RESOURCE_GROUP% --environment %CONTAINERAPPS_ENVIRONMENT% --image <your docker hub account>/dotnet-pizza-backend-appinsights:latest --target-port 80 --ingress external --min-replicas 1 --max-replicas 1 --enable-dapr --dapr-app-id order-processor-http --dapr-app-port 80 --env-vars "APPLICATIONINSIGHTS_CONNECTION_STRING=<your_appinsights_connectionstring>"
 ```

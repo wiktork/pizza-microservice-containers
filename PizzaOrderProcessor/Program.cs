@@ -5,6 +5,7 @@ using PizzaOrderProcessor.models;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplicationInsightsTelemetry();
+builder.Services.AddServiceProfiler();
 
 var app = builder.Build();
 
@@ -28,7 +29,7 @@ app.MapGet("/dapr/subscribe", () => {
 
 // Get order by orderId
 app.MapGet("/order/{orderId}", (string orderId) => {
-    // fetch order from cosmosdb state store by orderId
+    // fetch order from storage state store by orderId
     Console.WriteLine("Web URL in /order/{orderId}: "+ $"{stateStoreBaseUrl}/{orderId.ToString()}");
     var resp = httpClient.GetStringAsync($"{stateStoreBaseUrl}/{orderId.ToString()}");
     Console.WriteLine("Println resp");
@@ -40,12 +41,12 @@ app.MapGet("/order/{orderId}", (string orderId) => {
 // Update order status by orderId
 app.MapPost("/order/status", (DaprData<OrderStatus> requestData) => {
     var orderStatus = requestData.Data;
-    // fetch order from cosmosdb state store by orderId
+    // fetch order from storage state store by orderId
     var resp = httpClient.GetStringAsync($"{stateStoreBaseUrl}/{orderStatus.OrderId.ToString()}");
     var order = JsonSerializer.Deserialize<Order>(resp.Result)!;
     // update order status
     order.Status = orderStatus.Status;
-    // post the updated order to cosmosdb state store
+    // post the updated order to storage state store
     var orderInfoJson = JsonSerializer.Serialize(
         new[] {
             new {

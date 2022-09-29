@@ -42,7 +42,11 @@
           "dependencies": {
             "Microsoft.ApplicationInsights.AspNetCore": {
               "target": "Package",
-              "version": "[2.15.0, )"
+              "version": "[2.21.0, )"
+            },
+            "Microsoft.ApplicationInsights.Profiler.AspNetCore": {
+              "target": "Package",
+              "version": "[2.4.0, )"
             },
             "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
               "target": "Package",
