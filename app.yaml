@@ -15,9 +15,15 @@ properties:
       allowInsecure: false
       external: true
       targetPort: 80
+    secrets:
+      - name: storagekey
+        value: <YOUR STORAGE KEY>
   managedEnvironmentId: /subscriptions/400d8be0-b9fe-4e86-a733-74e1938f890a/resourceGroups/wiktork-pizza-rg/providers/Microsoft.App/managedEnvironments/wikappenv
   template:
     revisionSuffix: ""
+    volumes:
+      - name: 'diagport'
+        storageType: 'EmptyDir'
     containers:
       - image: cathyxwang/dotnet-pizza-backend-appinsights:latest
         name: order-processor-http
@@ -26,6 +32,39 @@ properties:
           cpu: 0.5
           ephemeralStorage: ""
           memory: 1Gi
+        volumeMounts:
+          - mountPath: '/diagport'
+            volumeName: 'diagport'
+        env:
+          - name: 'DOTNET_DiagnosticPorts'
+            value: '/diagport/port.sock'
+      - image: mcr.microsoft.com/dotnet/monitor:6
+        name: 'dotnet-monitor'
+        volumeMounts:
+          - mountPath: '/diagport'
+            volumeName: 'diagport'
+        command: 
+          - dotnet-monitor
+        args:
+          - collect
+          - --no-auth
+        env:
+          - name: 'DotnetMonitor_DiagnosticPort__ConnectionMode'
+            value: 'Listen'
+          - name: 'DotnetMonitor_Storage__DumpTempFolder'
+            value: '/diagport'
+          - name: 'DotnetMonitor_Urls'
+            value: 'http://*:52323'
+          - name: 'DotnetMonitor_DiagnosticPort__EndpointName'
+            value: '/diagport/port.sock'
+          - name: 'Egress__AzureBlobStorage__monitorBlob__AccountUri'
+            value: 'https://wikpizzastorage.blob.core.windows.net'
+          - name: 'Egress__AzureBlobStorage__monitorBlob__ContainerName'
+            value: 'dotnet-monitor'
+          - name: 'Egress__AzureBlobStorage__monitorBlob__BlobPrefix'
+            value: 'artifacts'
+          - name: 'Egress__AzureBlobStorage__monitorBlob__AccountKey'
+            secretRef: storagekey
     scale:
       maxReplicas: 1
       minReplicas: 1
