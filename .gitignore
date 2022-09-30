@@ -1,7 +1,6 @@
 .DS_Store
 .idea/
 /components_local
-PizzaOrderProcessor/aca-dapr-components
 PizzaOrderProcessor/.idea/
 PizzaOrderProcessor/bin/
 PizzaOrderProcessor/obj/
@@ -15,4 +14,3 @@ PizzaOrderProcessor/Properties/serviceDependencies.local.json
 PizzaOrderProcessor/Properties/serviceDependencies.local.json.user
 /PizzaOrderProcessor/PizzaOrderProcessor.csproj.user
 /PizzaOrderProcessor/.config
-/PizzaOrderProcessor/obj/PizzaOrderProcessor.csproj.nuget.dgspec.json

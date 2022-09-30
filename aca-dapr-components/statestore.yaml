@@ -3,13 +3,13 @@ componentType: state.azure.blobstorage
 version: v1
 metadata:
 - name: accountName
-  value: "[your_account_name]"
+  value: "wikpizzastorage"
 - name: accountKey
   secretRef: account-key
 - name: containerName
-  value: "[your_container_name]"
+  value: "pizza"
 secrets:
 - name: account-key
-  value: "[your_account_key]"
+  value: ""
 scopes:
 - order-processor-http

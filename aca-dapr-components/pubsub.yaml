@@ -6,7 +6,7 @@ metadata:
   secretRef: connection-string
 secrets:
 - name: connection-string # Required when not using Azure Authentication.
-  value: "your service bus connection string"
+  value: ""
 scopes:
 - order-web
 - order-processor-http
