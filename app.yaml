@@ -1,0 +1,31 @@
+kind: containerapp
+name: order-processor-http
+resourceGroup: wiktork-pizza-rg
+type: Microsoft.App/containerApps
+location: westus3
+properties:
+  configuration:
+    activeRevisionsMode: Single
+    dapr:
+      appId: order-processor-http
+      appPort: 80
+      appProtocol: http
+      enabled: true
+    ingress:
+      allowInsecure: false
+      external: true
+      targetPort: 80
+  managedEnvironmentId: /subscriptions/400d8be0-b9fe-4e86-a733-74e1938f890a/resourceGroups/wiktork-pizza-rg/providers/Microsoft.App/managedEnvironments/wikappenv
+  template:
+    revisionSuffix: ""
+    containers:
+      - image: cathyxwang/dotnet-pizza-backend-appinsights:latest
+        name: order-processor-http
+        probes: []
+        resources:
+          cpu: 0.5
+          ephemeralStorage: ""
+          memory: 1Gi
+    scale:
+      maxReplicas: 1
+      minReplicas: 1
