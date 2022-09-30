@@ -28,10 +28,10 @@ app.MapGet("/dapr/subscribe", () => {
 });
 
 // Get order by orderId
-app.MapGet("/order/{orderId}", (string orderId) => {
+app.MapGet("/order", (string orderId) => {
     // fetch order from storage state store by orderId
-    Console.WriteLine("Web URL in /order/{orderId}: "+ $"{stateStoreBaseUrl}/{orderId.ToString()}");
-    var resp = httpClient.GetStringAsync($"{stateStoreBaseUrl}/{orderId.ToString()}");
+    Console.WriteLine("Web URL in /order/{orderId}: "+ $"{stateStoreBaseUrl}/{orderId}");
+    var resp = httpClient.GetStringAsync($"{stateStoreBaseUrl}/{orderId}");
     Console.WriteLine("Println resp");
     Console.WriteLine(resp.Result);
     var order = JsonSerializer.Deserialize<Order>(resp.Result)!;
