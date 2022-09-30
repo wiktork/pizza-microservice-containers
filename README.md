@@ -53,6 +53,13 @@ az storage account create --name "your_storage_account_name" --resource-group "y
 az storage container create --name "your_container_name" --account-name "your_storage_account_name" --public-access container
 ```
 
+* Create an [Application Insights](https://learn.microsoft.com/azure/azure-monitor/app/create-new-resource)
+```
+az extension add -n application-insights
+```
+```
+az monitor app-insights component create --app "your_appinsights_name" --location "your_location" --resource-group "your_resource_group_name"
+```
 
 ## Test Locally
 Download this repository to test the code locally.
@@ -63,13 +70,20 @@ In */components* directory there are two Dapr component files:
 
 Put your Azure service bus connection string in pubsub.yaml and Azure Storage blob info in statestore.yaml.
 
-### start Dapr process
+### Start Dapr process
 ```
 dapr init
 ```
 
 ### Run PizzaWeb
-Change project to the *PizzaWeb* directory. Initialize the project:
+Change project to the *PizzaWeb* directory. 
+
+Set App Insights connection string environment vairable:
+```
+set APPLICATIONINSIGHTS_CONNECTION_STRING="your_appinsights_connectionstring"
+```
+
+Initialize the project:
 ```
 npm install
 ```
@@ -84,6 +98,12 @@ Web application's entry point is : http://localhost:3000/
 
 ## PizzaOrderProcessor
 Change project to the *PizzaOrderProcessor* directory.
+
+Set App Insights connection string environment vairable:
+```
+set APPLICATIONINSIGHTS_CONNECTION_STRING="your_appinsights_connectionstring"
+```
+
 Initialize the project:
 ```
 dotnet restore
