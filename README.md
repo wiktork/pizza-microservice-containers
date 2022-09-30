@@ -163,7 +163,7 @@ az group create --name %RESOURCE_GROUP% --location %LOCATION%
 
 3. Create Azure Container App Environment
 ```azure cli
-az containerapp env create --name %CONTAINERAPPS_ENVIRONMENT% --resource-group %RESOURCE_GROUP% --location %LOCATION%
+az containerapp env create --name %CONTAINERAPPS_ENVIRONMENT% --resource-group %RESOURCE_GROUP% --location %LOCATION% --dapr-instrumentation-key your_appinsights_key --logs-workspace-id your_workspace_id
 ```
 
 ### Deploy Dapr component

@@ -10,7 +10,7 @@ $(document).ready(function(){
         $('.searched-order-status').text("Order Status for "+orderNumber);
         if (orderNumber != null)
         {
-            $.get(`/getOrderStatus/${orderNumber}`, function(data,status,xhr){
+            $.get(`/getOrderStatus?OrderID=${orderNumber}`, function(data,status,xhr){
                 clearDisplayStatus();
                 orderStatus = JSON.stringify(data);
                 console.log("Order status: "+ orderStatus);

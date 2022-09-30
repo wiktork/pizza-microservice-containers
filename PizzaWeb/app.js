@@ -67,10 +67,10 @@ app.post('/submitOrder', function(req, res){
         });
 });
 
-app.get('/getOrderStatus/:OrderID', function(req,res){
+app.get('/getOrderStatus', function(req,res){
     console.log("invoked /getOrderStatus GET method");
-    console.log("outputting the req order ID: "+ JSON.stringify(req.params["OrderID"]));
-    var OrderID = req.params["OrderID"];
+    console.log("outputting the req order ID: "+ JSON.stringify(req.query["OrderID"]));
+    var OrderID = req.query["OrderID"];
     axios.get(`${DAPR_HOST}:${DAPR_HTTP_PORT}/order/${OrderID}`, axiosConfig)
     .then(function(response){
         console.log("is response body null: ", response.body == null);
