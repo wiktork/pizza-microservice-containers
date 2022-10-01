@@ -72,9 +72,9 @@ properties:
           - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__ProviderName'
             value: 'System.Runtime'
           - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__CounterName'
-            value: 'assembly_count' #threadpool-queue-length
-          - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__GreaterThan'
-            value: '10.0'
+            value: 'threadpool-queue-length' #threadpool-queue-length
+          - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__LessThan'
+            value: '100'
           - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__SlidingWindowDuration'
             value: '00:00:10'
           - name: 'CollectionRules__ThreadPoolQueuing__Actions__0__Type'
