@@ -38,7 +38,9 @@ properties:
         env:
           - name: 'DOTNET_DiagnosticPorts'
             value: '/diagport/port.sock'
-      - image: mcr.microsoft.com/dotnet/monitor:6
+          # - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+          #   value: <Connection string>
+      - image: mcr.microsoft.com/dotnet/nightly/monitor:7.0.0-rc.1
         name: 'dotnet-monitor'
         volumeMounts:
           - mountPath: '/diagport'
@@ -65,6 +67,22 @@ properties:
             value: 'artifacts'
           - name: 'Egress__AzureBlobStorage__monitorBlob__AccountKey'
             secretRef: storagekey
+          - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Type'
+            value: 'EventCounter'
+          - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__ProviderName'
+            value: 'System.Runtime'
+          - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__CounterName'
+            value: 'assembly_count' #threadpool-queue-length
+          - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__GreaterThan'
+            value: '10.0'
+          - name: 'CollectionRules__ThreadPoolQueuing__Trigger__Settings__SlidingWindowDuration'
+            value: '00:00:10'
+          - name: 'CollectionRules__ThreadPoolQueuing__Actions__0__Type'
+            value: 'CollectGCDump'
+          - name: 'CollectionRules__ThreadPoolQueuing__Limits__ActionCount'
+            value: '1'
+          - name: 'CollectionRules__ThreadPoolQueuing__Actions__0__Settings__Egress'
+            value: 'monitorBlob'
     scale:
       maxReplicas: 1
       minReplicas: 1
