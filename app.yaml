@@ -38,8 +38,8 @@ properties:
         env:
           - name: 'DOTNET_DiagnosticPorts'
             value: '/diagport/port.sock'
-          # - name: APPLICATIONINSIGHTS_CONNECTION_STRING
-          #   value: <Connection string>
+          - name: APPLICATIONINSIGHTS_CONNECTION_STRING
+            value: <Connection string>
       - image: mcr.microsoft.com/dotnet/nightly/monitor:7.0.0-rc.1
         name: 'dotnet-monitor'
         volumeMounts:
